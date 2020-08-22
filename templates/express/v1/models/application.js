@@ -13,6 +13,7 @@ const applicationWrapper = ({
 				data: {
 					name: config.app.name,
 					port: config.app.port,
+					payload,
 				}
 			});
 		} catch (error) {
@@ -20,7 +21,6 @@ const applicationWrapper = ({
 				statusCode: 500,
 				message: error.message,
 			};
-
 			return onError(retorno);
 		}
 	};

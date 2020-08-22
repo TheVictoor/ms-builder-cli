@@ -12,5 +12,4 @@ const init = async () => {
   }
 };
 
-// eslint-disable-next-line linebreak-style
 module.exports = init();

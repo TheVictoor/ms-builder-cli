@@ -2,7 +2,7 @@
 
 const adaptersWrapper = require('../adapters');
 const someFeatureController = require('./some-feature-controller');
-const config = require('../config');
+const config = require('../../config');
 
 const adapters = adaptersWrapper({
   config,

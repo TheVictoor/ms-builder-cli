@@ -1,6 +1,7 @@
 'use strict';
 
 const controllers = require('../controllers');
+const schemas = require('../schemas');
 
 const routes = [
   {
@@ -11,6 +12,9 @@ const routes = [
       notes: 'some feature with a get method',
       description: 'its a nice feature',
       handler: controllers.someFeature.get,
+      validate: {
+        query: schemas.urlTeste
+      },
     },
   },
 ];

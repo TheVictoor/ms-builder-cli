@@ -1,5 +1,5 @@
 
-const applicationControlller = (models) => {
+const applicationHandler = (models) => {
 	const info = (req, res, next) => {
 		const payload = {
 			...req.query,
@@ -31,4 +31,4 @@ const applicationControlller = (models) => {
 	};
 };
 
-module.exports = applicationControlller;
+module.exports = applicationHandler;
