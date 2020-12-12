@@ -14,7 +14,7 @@ const init = async () => {
 
   const swaggerOptions = {
     info: {
-      title: 'API Documentation',
+      title: 'API <%= projectName %> Documentation',
       version: '1.0.0',
     },
   };
