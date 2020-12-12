@@ -3,27 +3,30 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 const ejs = require('ejs');
+const yargs = require('yargs');
 
 const TEMPLATE_OPTIONS = fs.readdirSync(`${__dirname}/templates`);
 const CURR_DIR = process.cwd();
 const ARGUMENTS = [
   {
-    name: 'project-lib-base',
+    name: 'template',
     type: 'list',
-    message: 'base server lib',
-    choices: TEMPLATE_OPTIONS
+    message: 'What project template would you like generate',
+    choices: TEMPLATE_OPTIONS,
+    when: () => !yargs.argv["template"]
   },
   {
-    name: 'project-name',
+    name: 'name',
     type: 'input',
-    message: 'project name:',
+    message: 'What will be the project name',
     validate: function (input) {
       const namePattern = /^ms-([a-z-]*)$/;
       if (namePattern.test(input)) 
         return true;
       else 
         return 'Name must start with "ms-" and contains just lower case letters separated by "-"';
-    }
+    },
+    when: () => !yargs.argv["name"]
   }
 ];
 
