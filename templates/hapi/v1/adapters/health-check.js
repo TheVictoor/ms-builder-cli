@@ -12,8 +12,7 @@ const someFeatureWrapper = ({
     try {
       return onSuccess({
         data: {
-          name: config.app.name,
-          port: config.app.port,
+          message: `app ${config.app.name} running at ${config.app.port}`
         },
         statusCode: 200,
       });

@@ -5,7 +5,7 @@ const Inert = require('@hapi/inert');
 const Vision = require('@hapi/vision');
 const HapiSwagger = require('hapi-swagger');
 const config = require('./config');
-const routes = require('./routes');
+const routes = require('./v1/routes');
 
 const init = async () => {
   const server = Hapi.server({
@@ -14,7 +14,7 @@ const init = async () => {
 
   const swaggerOptions = {
     info: {
-      title: 'API Documentation',
+      title: 'API <%= projectName %> Documentation',
       version: '1.0.0',
     },
   };

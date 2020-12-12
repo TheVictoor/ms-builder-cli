@@ -2,58 +2,68 @@
 
 const inquirer = require('inquirer');
 const fs = require('fs');
+const ejs = require('ejs');
+const yargs = require('yargs');
 
 const TEMPLATE_OPTIONS = fs.readdirSync(`${__dirname}/templates`);
-
+const CURR_DIR = process.cwd();
 const ARGUMENTS = [
   {
-    name: 'project-choice',
+    name: 'template',
     type: 'list',
-    message: 'Lib do servidor',
-    choices: TEMPLATE_OPTIONS
+    message: 'What project template would you like generate',
+    choices: TEMPLATE_OPTIONS,
+    when: () => !yargs.argv["template"]
   },
   {
-    name: 'project-name',
+    name: 'name',
     type: 'input',
-    message: 'Nome do projeto:',
+    message: 'What will be the project name',
     validate: function (input) {
-      const namePattern = /^bf[fb]-ms-([a-z-]*)$/;
-      if (namePattern.test(input)) return true;
-      else return 'Nome do projeto deve iniciar com bff-ms- ou bfb-ms- e seguir incluindo apenas letras minusculas';
-    }
+      const namePattern = /^ms-([a-z-]*)$/;
+      if (namePattern.test(input)) 
+        return true;
+      else 
+        return 'Name must start with "ms-" and contains just lower case letters separated by "-"';
+    },
+    when: () => !yargs.argv["name"]
   }
 ];
 
-const CURR_DIR = process.cwd();
-
 inquirer.prompt(ARGUMENTS)
   .then(answers => {
-    const projectChoice = answers['project-choice'];
-    const projectName = answers['project-name'];
-    const templatePath = `${__dirname}/templates/${projectChoice}`;
+    answers = Object.assign({}, answers, yargs.argv);
+    const template = answers['template'];
+    const name = answers['name'];
+    const path = `${__dirname}/templates/${template}`;
 
-    fs.mkdirSync(`${CURR_DIR}/${projectName}`);
+    fs.mkdirSync(`${CURR_DIR}/${name}`);
 
-    createDirectoryContents(templatePath, projectName);
+    createDirectoryContents(path, name, name);
   });
 
-function createDirectoryContents(templatePath, newProjectPath) {
+function createDirectoryContents(templatePath, newProjectPath, projectName) {
   const filesToCreate = fs.readdirSync(templatePath);
 
   filesToCreate.forEach(file => {
     const origFilePath = `${templatePath}/${file}`;
 
-    // get stats about the current file
     const stats = fs.statSync(origFilePath);
 
     if (stats.isFile()) {
-      const contents = fs.readFileSync(origFilePath, 'utf8');
-
+      let contents = fs.readFileSync(origFilePath, 'utf8');
+      contents = render(contents, { 
+        projectName 
+      });
       const writePath = `${CURR_DIR}/${newProjectPath}/${file}`;
       fs.writeFileSync(writePath, contents, 'utf8');
     } else if (stats.isDirectory()) {
       fs.mkdirSync(`${CURR_DIR}/${newProjectPath}/${file}`);
-      createDirectoryContents(`${templatePath}/${file}`, `${newProjectPath}/${file}`);
+      createDirectoryContents(`${templatePath}/${file}`, `${newProjectPath}/${file}`, projectName);
     }
   });
+}
+
+function render(content, data) {
+  return ejs.render(content, data);
 }
