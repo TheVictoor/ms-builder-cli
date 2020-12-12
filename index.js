@@ -33,13 +33,14 @@ const ARGUMENTS = [
 inquirer.prompt(ARGUMENTS)
   .then(answers => {
     answers = Object.assign({}, answers, yargs.argv);
-    const projectChoice = answers['project-choice'];
-    const projectName = answers['project-name'];
-    const templatePath = `${__dirname}/templates/${projectChoice}`;
+    console.log(answers);
+    const template = answers['template'];
+    const name = answers['name'];
+    const path = `${__dirname}/templates/${template}`;
 
-    fs.mkdirSync(`${CURR_DIR}/${projectName}`);
+    fs.mkdirSync(`${CURR_DIR}/${name}`);
 
-    createDirectoryContents(templatePath, projectName, projectName);
+    createDirectoryContents(path, name, name);
   });
 
 function createDirectoryContents(templatePath, newProjectPath, projectName) {
