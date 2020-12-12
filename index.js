@@ -33,7 +33,6 @@ const ARGUMENTS = [
 inquirer.prompt(ARGUMENTS)
   .then(answers => {
     answers = Object.assign({}, answers, yargs.argv);
-    console.log(answers);
     const template = answers['template'];
     const name = answers['name'];
     const path = `${__dirname}/templates/${template}`;
