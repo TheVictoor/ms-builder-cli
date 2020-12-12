@@ -2,6 +2,7 @@
 
 const inquirer = require('inquirer');
 const fs = require('fs');
+const ejs = require('ejs');
 
 const TEMPLATE_OPTIONS = fs.readdirSync(`${__dirname}/templates`);
 const CURR_DIR = process.cwd();
@@ -35,10 +36,10 @@ inquirer.prompt(ARGUMENTS)
 
     fs.mkdirSync(`${CURR_DIR}/${projectName}`);
 
-    createDirectoryContents(templatePath, projectName);
+    createDirectoryContents(templatePath, projectName, projectName);
   });
 
-function createDirectoryContents(templatePath, newProjectPath) {
+function createDirectoryContents(templatePath, newProjectPath, projectName) {
   const filesToCreate = fs.readdirSync(templatePath);
 
   filesToCreate.forEach(file => {
@@ -47,12 +48,19 @@ function createDirectoryContents(templatePath, newProjectPath) {
     const stats = fs.statSync(origFilePath);
 
     if (stats.isFile()) {
-      const contents = fs.readFileSync(origFilePath, 'utf8');
+      let contents = fs.readFileSync(origFilePath, 'utf8');
+      contents = template.render(contents, { 
+        projectName 
+      });
       const writePath = `${CURR_DIR}/${newProjectPath}/${file}`;
       fs.writeFileSync(writePath, contents, 'utf8');
     } else if (stats.isDirectory()) {
       fs.mkdirSync(`${CURR_DIR}/${newProjectPath}/${file}`);
-      createDirectoryContents(`${templatePath}/${file}`, `${newProjectPath}/${file}`);
+      createDirectoryContents(`${templatePath}/${file}`, `${newProjectPath}/${file}`, projectName);
     }
   });
+}
+
+function render(content, data) {
+  return ejs.render(content, data);
 }
