@@ -30,9 +30,9 @@ const ARGUMENTS = [
   }
 ];
 
-
 inquirer.prompt(ARGUMENTS)
   .then(answers => {
+    answers = Object.assign({}, answers, yargs.argv);
     const projectChoice = answers['project-choice'];
     const projectName = answers['project-name'];
     const templatePath = `${__dirname}/templates/${projectChoice}`;
@@ -52,7 +52,7 @@ function createDirectoryContents(templatePath, newProjectPath, projectName) {
 
     if (stats.isFile()) {
       let contents = fs.readFileSync(origFilePath, 'utf8');
-      contents = template.render(contents, { 
+      contents = render(contents, { 
         projectName 
       });
       const writePath = `${CURR_DIR}/${newProjectPath}/${file}`;
