@@ -1,7 +1,7 @@
 'use strict';
 
-const someFeatureWrapper = require('./some-feature');
+const healthCheckWrapper = require('./health-check');
 
 module.exports = (dependencies) => ({
-  someFeature: someFeatureWrapper(dependencies),
+  healthCheck: healthCheckWrapper(dependencies),
 });

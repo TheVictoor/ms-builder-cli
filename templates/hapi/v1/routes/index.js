@@ -5,16 +5,13 @@ const schemas = require('../schemas');
 
 const routes = [
   {
-    path: '/url/test',
+    path: '/',
     method: ['GET'],
     options: {
       tags: ['api'],
-      notes: 'some feature with a get method',
-      description: 'its a nice feature',
-      handler: controllers.someFeature.get,
-      validate: {
-        query: schemas.urlTeste
-      },
+      notes: 'HealthCheck API',
+      description: 'Check if the api is running',
+      handler: controllers.healthCheck.get,
     },
   },
 ];

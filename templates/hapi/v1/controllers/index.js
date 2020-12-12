@@ -1,7 +1,7 @@
 'use strict';
 
 const adaptersWrapper = require('../adapters');
-const someFeatureController = require('./some-feature-controller');
+const healthCheckController = require('./health-check-controller');
 const config = require('../../config');
 
 const adapters = adaptersWrapper({
@@ -9,5 +9,5 @@ const adapters = adaptersWrapper({
 });
 
 module.exports = {
-  someFeature: someFeatureController(adapters),
+  healthCheck: healthCheckController(adapters),
 };
