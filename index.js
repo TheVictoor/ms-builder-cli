@@ -4,27 +4,28 @@ const inquirer = require('inquirer');
 const fs = require('fs');
 
 const TEMPLATE_OPTIONS = fs.readdirSync(`${__dirname}/templates`);
-
+const CURR_DIR = process.cwd();
 const ARGUMENTS = [
   {
-    name: 'project-choice',
+    name: 'project-lib-base',
     type: 'list',
-    message: 'Lib do servidor',
+    message: 'base server lib',
     choices: TEMPLATE_OPTIONS
   },
   {
     name: 'project-name',
     type: 'input',
-    message: 'Nome do projeto:',
+    message: 'project name:',
     validate: function (input) {
-      const namePattern = /^bf[fb]-ms-([a-z-]*)$/;
-      if (namePattern.test(input)) return true;
-      else return 'Nome do projeto deve iniciar com bff-ms- ou bfb-ms- e seguir incluindo apenas letras minusculas';
+      const namePattern = /^ms-([a-z-]*)$/;
+      if (namePattern.test(input)) 
+        return true;
+      else 
+        return 'Name must start with "ms-" and contains just lower case letters separated by "-"';
     }
   }
 ];
 
-const CURR_DIR = process.cwd();
 
 inquirer.prompt(ARGUMENTS)
   .then(answers => {
@@ -43,12 +44,10 @@ function createDirectoryContents(templatePath, newProjectPath) {
   filesToCreate.forEach(file => {
     const origFilePath = `${templatePath}/${file}`;
 
-    // get stats about the current file
     const stats = fs.statSync(origFilePath);
 
     if (stats.isFile()) {
       const contents = fs.readFileSync(origFilePath, 'utf8');
-
       const writePath = `${CURR_DIR}/${newProjectPath}/${file}`;
       fs.writeFileSync(writePath, contents, 'utf8');
     } else if (stats.isDirectory()) {
