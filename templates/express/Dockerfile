@@ -1,6 +1,6 @@
 FROM node:12.18
 
-COPY . . 
+COPY . .
 
 RUN npm install 
 
