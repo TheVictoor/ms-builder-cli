@@ -2,6 +2,6 @@ FROM node:12.18
 
 COPY . .
 
-RUN npm install 
+RUN npm install
 
-ENTRYPOINT [ "npm start" ]
+CMD npm start
