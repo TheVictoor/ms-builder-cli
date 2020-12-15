@@ -3,7 +3,9 @@
 const {
   APPLICATION_NAME,
   APPLICATION_PORT,
-  DATABASE_CONNECTION_STRING
+  DATABASE_HOST,
+  DATABASE_USER,
+  DATABASE_PASSWORD,
 } = process.env;
 
 module.exports = {
@@ -12,6 +14,8 @@ module.exports = {
     port: APPLICATION_PORT,
   },
   database: {
-    connectionString: DATABASE_CONNECTION_STRING,
+    connectionHost: DATABASE_HOST,
+    user: DATABASE_USER,
+    password: DATABASE_PASSWORD
   }
 };
