@@ -1,20 +1,22 @@
+
 module.exports = ({ client, config }) => {
   const locals = {};
 
   const connect = async () => {
     if (locals.conn) return locals.conn;
 
-    locals.conn = await client.connect(config.database.connectionString, {
-      useUnifiedTopology: true,
-    });
+    locals.conn = client.driver(
+      config.database.connectionHost,
+      client.auth.basic(config.database.user, config.database.password)
+    )
 
     return locals.conn;
   };
 
   return {
-    async getDatabase(dbname) {
+    async getConnection() {
       const conn = await connect();
-      return conn.db(dbname);
+      return conn;
     },
   };
 };
