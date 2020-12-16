@@ -21,7 +21,7 @@ describe('GET: url/test', () => {
       const dependencies = {
         config: {
           app: {
-            name: 'name-test',
+            name: '<%= projectName %>',
             port: 3001,
           }
         },
@@ -35,7 +35,7 @@ describe('GET: url/test', () => {
       const adapters = adaptersWrapper(dependencies);
       const result = await adapters.healthCheck.get(dependencies);
   
-      expect(result.data.message).toBe('ok');
+      expect(result.data.message).toBe(`app <%= projectName %> running at 3001`);
     });
 
     it('Should return an object with the message when a error occour', async () => {
