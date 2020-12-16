@@ -1,22 +1,23 @@
-const adaptersWrapper = require('../../adapters');
+const adaptersWrapper = require('../../v1/adapters');
 
-describe('Smoke test on someFeature adapter', () => {
+describe('Smoke test on health-check adapter', () => {
   it('Should inject the dependencies into the adapter and get a reference', () => {
     const dependencies = {
       config: {},
+      database: {},
     };
 
     const adapters = adaptersWrapper(dependencies);
 
     expect(adapters).toBeInstanceOf(Object);
-    expect(adapters.someFeature).toBeInstanceOf(Object);
-    expect(adapters.someFeature.get).not.toBeUndefined();
+    expect(adapters.healthCheck).toBeInstanceOf(Object);
+    expect(adapters.healthCheck.get).not.toBeUndefined();
   });
 });
 
 describe('GET: url/test', () => {
   describe('When call the route', () => {
-    it('Should get a object with information about the micro serivce', async () => {
+    it('Should get a ok message', async () => {
       const dependencies = {
         config: {
           app: {
@@ -24,6 +25,7 @@ describe('GET: url/test', () => {
             port: 3001,
           }
         },
+        database: {},
         paylaod: {},
         headers: {},
         onSuccess: data => data,
@@ -31,10 +33,9 @@ describe('GET: url/test', () => {
       };
   
       const adapters = adaptersWrapper(dependencies);
-      const result = await adapters.someFeature.get(dependencies);
+      const result = await adapters.healthCheck.get(dependencies);
   
-      expect(result.data.name).toBe('name-test');
-      expect(result.data.port).toBe(3001);
+      expect(result.data.message).toBe('ok');
     });
 
     it('Should return an object with the message when a error occour', async () => {
@@ -45,6 +46,7 @@ describe('GET: url/test', () => {
             port: 3001,
           }
         },
+        database: {},
         paylaod: {},
         headers: {},
         onSuccess: data => { throw new Error('error unexpected') },
@@ -52,7 +54,7 @@ describe('GET: url/test', () => {
       };
   
       const adapters = adaptersWrapper(dependencies);
-      const result = await adapters.someFeature.get(dependencies);
+      const result = await adapters.healthCheck.get(dependencies);
   
       expect(result.message).toBe('error unexpected');
       expect(result.statusCode).toBe(500);
