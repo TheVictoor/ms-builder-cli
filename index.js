@@ -52,6 +52,7 @@ function createDirectoryContents(templatePath, newProjectPath, projectName) {
 
     if (stats.isFile()) {
       let contents = fs.readFileSync(origFilePath, 'utf8');
+      // console.log(file);
       contents = render(contents, { 
         projectName 
       });
