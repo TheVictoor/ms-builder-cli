@@ -1,7 +1,6 @@
-'use strict';
+'use strict'
 
-const controllers = require('../controllers');
-const schemas = require('../schemas');
+const controllers = require('../controllers')
 
 const routes = [
   {
@@ -11,9 +10,9 @@ const routes = [
       tags: ['api'],
       notes: 'HealthCheck API',
       description: 'Check if the api is running',
-      handler: controllers.healthCheck.get,
-    },
-  },
-];
+      handler: controllers.healthCheck.get
+    }
+  }
+]
 
-module.exports = routes;
+module.exports = routes

@@ -1,24 +1,24 @@
-'use strict';
+'use strict'
 
 const commandWrapper = ({
-	connection
+  connection
 }) => {
-	const execute = async (cypher, props) => {
-		try {
-			const database = await connection;
-			const session = database.session();
-			const result = await session.run(cypher, props);
-			session.close();
-			return result;
-		} catch (error) {
-			console.log(`error when execute command on neo4j`);
-			throw error;
-		}	
-	};
+  const execute = async (cypher, props) => {
+    try {
+      const database = await connection
+      const session = database.session()
+      const result = await session.run(cypher, props)
+      session.close()
+      return result
+    } catch (error) {
+      console.log('error when execute command on neo4j')
+      throw error
+    }
+  }
 
-	return {
-		execute
-	}
-};
+  return {
+    execute
+  }
+}
 
-module.exports = commandWrapper;
+module.exports = commandWrapper

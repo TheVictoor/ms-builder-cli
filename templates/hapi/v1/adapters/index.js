@@ -1,7 +1,7 @@
-'use strict';
+'use strict'
 
-const healthCheckWrapper = require('./health-check');
+const healthCheckWrapper = require('./health-check')
 
 module.exports = (dependencies) => ({
-  healthCheck: healthCheckWrapper(dependencies),
-});
+  healthCheck: healthCheckWrapper(dependencies)
+})
