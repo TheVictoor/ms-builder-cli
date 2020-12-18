@@ -1,15 +1,16 @@
-require('dotenv').config();
+require('dotenv').config()
 
-const server = require('./server');
+const server = require('./server')
+const config = require('./config')
 
 const init = async () => {
   try {
-    const serverInstance = await server;
-    await serverInstance.start();
-    console.log('API is running');
+    const serverInstance = await server
+    await serverInstance.start()
+    console.log(`API is running at ${config.app.port}`)
   } catch (error) {
-    console.log({ message: `API failed to start ${error.message}` });
+    console.log({ message: `API failed to start ${error.message}` })
   }
-};
+}
 
-module.exports = init();
+module.exports = init()

@@ -9,12 +9,12 @@ const routes = require('./v1/routes');
 
 const init = async () => {
   const server = Hapi.server({
-    port: config.app.port || 8080,
+    port: config.app.port || 3000,
   });
 
   const swaggerOptions = {
     info: {
-      title: 'API <%= projectName %> Documentation',
+      title: 'API <%= projectName %> documentation',
       version: '1.0.0',
     },
   };
