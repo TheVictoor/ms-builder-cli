@@ -10,6 +10,9 @@ const routes = require('./v1/routes');
 const init = async () => {
   const server = Hapi.server({
     port: config.app.port || 3000,
+    routes: {
+      cors: true
+    }
   });
 
   const swaggerOptions = {

@@ -7,6 +7,6 @@ module.exports = (adapters) => ({
     },
     header: request.header,
     onSuccess: ({ data, statusCode }) => res.response(data).code(statusCode),
-    onError: (error) => res.response(JSON.stringify(error)).code(error.statusCode)
+    onError: ({ data, statusCode }) => res.response(data).code(statusCode)
   })
 })

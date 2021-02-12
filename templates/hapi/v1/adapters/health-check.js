@@ -18,8 +18,11 @@ const someFeatureWrapper = ({
       })
     } catch (error) {
       return onError({
-        statusCode: 500,
-        message: error.message
+        statusCode: error.statusCode || 500,
+        data: {
+          code: 'internal-server-error',
+          message: error.message
+        }
       })
     }
   }
