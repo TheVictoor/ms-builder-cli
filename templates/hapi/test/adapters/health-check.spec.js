@@ -56,7 +56,7 @@ describe('GET: url/test', () => {
       const adapters = adaptersWrapper(dependencies);
       const result = await adapters.healthCheck.get(dependencies);
   
-      expect(result.message).toBe('error unexpected');
+      expect(result.data.message).toBe('error unexpected');
       expect(result.statusCode).toBe(500);
     });
   });
