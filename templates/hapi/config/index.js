@@ -1,8 +1,8 @@
 'use strict'
 
 const {
-  APPLICATION_NAME,
-  PORT,
+  APPLICATION_NAME = "no-name",
+  PORT = 8000,
   DATABASE_HOST,
   DATABASE_USER,
   DATABASE_PASSWORD
