@@ -1,15 +1,13 @@
-# <center> MS BUILDER CLI </center>
+# <center> MsBuilder CLI </center>
 
-## EASY HAPI AND EXPRESS TEMPLATES FOR NODE JS MICRO-SERVICES
-- pre setted folders and start up
-- pre setted auto-swagger
-- pre setted eslint
-- pre setted Dockerfile
-- pre setted docker-compose.yaml (in progress)
-- pre setted kubernetes configuration (in progress)
-- pre setted tests script (jest)
+## Build Hapi.js micro services template
+- folders and startup
+- auto-swagger
+- eslint
+- dockerfile
+- tests script (jest)
 
-## HOW TO USE?
+## How to use?
 ```bash
     npm i .
     npm link # linux only
@@ -18,6 +16,6 @@
 
 ### OPTIONS
     --template
-        Template choosed to create the micro-service
+        micro service template (hapi or express)
     --name 
-        Name used to create the micro-service
+        micro service name
