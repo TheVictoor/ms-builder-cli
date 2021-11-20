@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "linter": "eslint --fix v*/**",
-    "check": "eslint --ext .js v*/**",
+    "linter": "eslint --fix src/**",
+    "check": "eslint --ext .js src/**",
     "test": "jest --coverage",
-    "start": "node index.js"
+    "start": "node src/entrypoints/index.js"
   },
   "author": "",
   "engines": {
@@ -21,7 +21,8 @@
     "@hapi/vision": "^6.0.1",
     "dotenv": "^8.2.0",
     "hapi-swagger": "^13.1.0",
-    "uuid": "^8.1.0"
+    "uuid": "^8.1.0",
+    "serialize-error": "^6.0.0"
   },
   "devDependencies": {
     "eslint": "^7.15.0",

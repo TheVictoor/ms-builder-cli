@@ -1,7 +1,7 @@
 require('dotenv').config()
 
 const server = require('./server')
-const config = require('./config')
+const config = require('../../config')
 
 const init = async () => {
   try {

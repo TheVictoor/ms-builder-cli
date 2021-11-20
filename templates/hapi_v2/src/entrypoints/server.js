@@ -4,8 +4,8 @@ const Hapi = require('@hapi/hapi');
 const Inert = require('@hapi/inert');
 const Vision = require('@hapi/vision');
 const HapiSwagger = require('hapi-swagger');
-const config = require('./config');
-const routes = require('./v1/routes');
+const config = require('../../config');
+const routes = require('../interfaces/routes');
 
 const init = async () => {
   const server = Hapi.server({
