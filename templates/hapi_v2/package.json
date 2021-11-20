@@ -1,0 +1,35 @@
+{
+  "name": "<%= projectName %>",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "linter": "eslint --fix v*/**",
+    "check": "eslint --ext .js v*/**",
+    "test": "jest --coverage",
+    "start": "node index.js"
+  },
+  "author": "",
+  "engines": {
+    "node": "12.x"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "@hapi/hapi": "^19.1.1",
+    "@hapi/inert": "^6.0.2",
+    "@hapi/joi": "^17.1.1",
+    "@hapi/vision": "^6.0.1",
+    "dotenv": "^8.2.0",
+    "hapi-swagger": "^13.1.0",
+    "uuid": "^8.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.15.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-config-standard": "^16.0.2",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "jest": "^26.0.1"
+  }
+}
